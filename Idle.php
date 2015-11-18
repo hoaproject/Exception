@@ -292,4 +292,22 @@ class Idle extends \Exception
     {
         return $this->raise();
     }
+
+    /**
+     * Enable uncaught exception handler.
+     * This is restricted to Hoa's exceptions only.
+     *
+     * @param   bool  $enable    Enable.
+     * @return  mixed
+     */
+    public static function enableUncaughtHandler($enable = true)
+    {
+        if (false === $enable) {
+            return restore_exception_handler();
+        }
+
+        return set_exception_handler(function ($exception) {
+            return Exception\Idle::uncaught($exception);
+        });
+    }
 }
