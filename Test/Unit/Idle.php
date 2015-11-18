@@ -218,4 +218,51 @@ class Idle extends Test\Unit\Suite
                 ->string($result)
                     ->isEqualTo($exception->raise());
     }
+
+    public function case_disable_uncaught_handler()
+    {
+        $this
+            ->given(
+                $this->function->restore_exception_handler = function () use (&$called) {
+                    $called = true;
+
+                    return null;
+                }
+            )
+            ->when($result = SUT::enableUncaughtHandler(false))
+            ->then
+                ->variable($result)
+                    ->isNull()
+                ->boolean($called)
+                    ->isTrue();
+    }
+
+    public function case_enable_uncaught_handler()
+    {
+        $self = $this;
+
+        $this
+            ->given(
+                $this->function->set_exception_handler = function ($handler) use ($self, &$called) {
+                    $called = true;
+
+                    $self
+                        ->object($handler)
+                            ->isInstanceOf('Closure')
+                        ->let($reflection = new \ReflectionObject($handler))
+                        ->array($invokeParameters = $reflection->getMethod('__invoke')->getParameters())
+                            ->hasSize(1)
+                        ->string($invokeParameters[0]->getName())
+                            ->isEqualTo('exception');
+
+                    return null;
+                }
+            )
+            ->when($result = SUT::enableUncaughtHandler())
+            ->then
+                ->variable($result)
+                    ->isNull()
+                ->boolean($called)
+                    ->isTrue();
+    }
 }
