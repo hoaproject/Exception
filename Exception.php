@@ -55,10 +55,10 @@ class Exception extends Idle implements Event\Source
      * array that contains the list of formatted string for the message. If
      * chaining, we can add a previous exception.
      *
-     * @param   string          $message      Formatted message.
-     * @param   int             $code         Code (the ID).
-     * @param   array           $arguments    Arguments to format message.
-     * @param   \BaseException  $previous     Previous exception in chaining.
+     * @param   string      $message      Formatted message.
+     * @param   int         $code         Code (the ID).
+     * @param   array       $arguments    Arguments to format message.
+     * @param   \Throwable  $previous     Previous exception in chaining.
      * @return  void
      */
     public function __construct(

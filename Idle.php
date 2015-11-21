@@ -262,9 +262,9 @@ class Idle extends \Exception
     /**
      * Catch uncaught exception (only \Hoa\Exception\Idle and children).
      *
-     * @param   \BaseException  $exception    The exception.
+     * @param   \Throwable  $exception    The exception.
      * @return  void
-     * @throws  \BaseException
+     * @throws  \Throwable
      */
     public static function uncaught($exception)
     {
@@ -307,7 +307,7 @@ class Idle extends \Exception
         }
 
         return set_exception_handler(function ($exception) {
-            return Exception\Idle::uncaught($exception);
+            return self::uncaught($exception);
         });
     }
 }

@@ -189,7 +189,7 @@ class          Group
      * Get an exception from the group.
      *
      * @param   mixed  $index    Index.
-     * @return  \Exception
+     * @return  Exception
      */
     public function offsetGet($index)
     {
@@ -206,7 +206,7 @@ class          Group
      * Set an exception in the group.
      *
      * @param   mixed       $index        Index.
-     * @param   \Exception  $exception    Exception.
+     * @param   Exception  $exception    Exception.
      * @return  void
      */
     public function offsetSet($index, $exception)
