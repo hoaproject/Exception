@@ -40,8 +40,8 @@ namespace Hoa\Exception;
  * Class \Hoa\Exception\Idle.
  *
  * `\Hoa\Exception\Idle` is the mother exception class of libraries. The only
- * difference between `\Hoa\Core\Exception\Idle` and its directly child
- * `\Hoa\Core\Exception` is that the latter fires events after beeing constructed.
+ * difference between `\Hoa\Exception\Idle` and its directly child
+ * `\Hoa\Exception` is that the latter fires events after beeing constructed.
  *
  * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License

@@ -36,7 +36,7 @@
 
 namespace Hoa\Exception;
 
-use Hoa\Core;
+use Hoa\Consistency;
 use Hoa\Event;
 
 /**
@@ -98,4 +98,4 @@ class Exception extends Idle implements Event\Source
 /**
  * Flex entity.
  */
-Core\Consistency::flexEntity('Hoa\Exception\Exception');
+Consistency::flexEntity('Hoa\Exception\Exception');
