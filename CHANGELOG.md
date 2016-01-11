@@ -1,3 +1,10 @@
+# 1.16.01.11
+
+  * Quality: Drop PHP5.4. (Ivan Enderlin, 2016-01-11T09:15:26+01:00)
+  * Quality: Run devtools:cs. (Ivan Enderlin, 2016-01-09T09:01:35+01:00)
+  * Core: Remove `Hoa\Core`. (Ivan Enderlin, 2016-01-09T08:16:03+01:00)
+  * Consistency: Use `Hoa\Consistency`. (Ivan Enderlin, 2015-12-08T11:11:27+01:00)
+
 # 0.15.11.23
 
   * Fix phpDoc and a mistake on a static call. (Metalaka, 2015-11-21T17:44:35+01:00)
