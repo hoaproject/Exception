@@ -1,3 +1,8 @@
+# 1.16.11.08
+
+  * Documentation: New `README.md` file. (Ivan Enderlin, 2016-10-19T16:31:55+02:00)
+  * Documentation: Update `support` properties. (Ivan Enderlin, 2016-10-05T20:39:14+02:00)
+
 # 1.16.01.11
 
   * Quality: Drop PHP5.4. (Ivan Enderlin, 2016-01-11T09:15:26+01:00)
