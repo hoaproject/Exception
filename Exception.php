@@ -8,7 +8,7 @@
  *
  * New BSD License
  *
- * Copyright © 2007-2016, Hoa community. All rights reserved.
+ * Copyright © 2007-2017, Hoa community. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -44,7 +44,7 @@ use Hoa\Event;
  *
  * Each exception must extend \Hoa\Exception\Exception.
  *
- * @copyright  Copyright © 2007-2016 Hoa community
+ * @copyright  Copyright © 2007-2017 Hoa community
  * @license    New BSD License
  */
 class Exception extends Idle implements Event\Source
@@ -59,7 +59,6 @@ class Exception extends Idle implements Event\Source
      * @param   int         $code         Code (the ID).
      * @param   array       $arguments    Arguments to format message.
      * @param   \Throwable  $previous     Previous exception in chaining.
-     * @return  void
      */
     public function __construct(
         $message,

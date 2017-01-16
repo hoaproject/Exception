@@ -8,7 +8,7 @@
  *
  * New BSD License
  *
- * Copyright © 2007-2016, Hoa community. All rights reserved.
+ * Copyright © 2007-2017, Hoa community. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -43,7 +43,7 @@ namespace Hoa\Exception;
  * difference between `\Hoa\Exception\Idle` and its directly child
  * `\Hoa\Exception` is that the latter fires events after beeing constructed.
  *
- * @copyright  Copyright © 2007-2016 Hoa community
+ * @copyright  Copyright © 2007-2017 Hoa community
  * @license    New BSD License
  */
 class Idle extends \Exception
@@ -95,7 +95,6 @@ class Idle extends \Exception
      * @param   int         $code         Code (the ID).
      * @param   array       $arguments    Arguments to format message.
      * @param   \Exception  $previous     Previous exception in chaining.
-     * @return  void
      */
     public function __construct(
         $message,
