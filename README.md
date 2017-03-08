@@ -5,8 +5,8 @@
 ---
 
 <p align="center">
-  <a href="https://travis-ci.org/hoaproject/exception"><img src="https://img.shields.io/travis/hoaproject/exception/master.svg" alt="Build status" /></a>
-  <a href="https://coveralls.io/github/hoaproject/exception?branch=master"><img src="https://img.shields.io/coveralls/hoaproject/exception/master.svg" alt="Code coverage" /></a>
+  <a href="https://travis-ci.org/hoaproject/Exception"><img src="https://img.shields.io/travis/hoaproject/Exception/master.svg" alt="Build status" /></a>
+  <a href="https://coveralls.io/github/hoaproject/Exception?branch=master"><img src="https://img.shields.io/coveralls/hoaproject/Exception/master.svg" alt="Code coverage" /></a>
   <a href="https://packagist.org/packages/hoa/exception"><img src="https://img.shields.io/packagist/dt/hoa/exception.svg" alt="Packagist" /></a>
   <a href="https://hoa-project.net/LICENSE"><img src="https://img.shields.io/packagist/l/hoa/exception.svg" alt="License" /></a>
 </p>
