@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -37,36 +39,24 @@
 namespace Hoa\Exception;
 
 /**
- * Class \Hoa\Exception\Group.
- *
- * This is an exception that contains a group of exceptions.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
+ * An exception that contains a group of exceptions.
  */
 class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Countable
 {
     /**
-     * All exceptions (stored in a stack for transactions).
-     *
-     * @var \SplStack
+     * All stack of exceptions.
      */
     protected $_group = null;
 
 
 
     /**
-     * Create an exception.
-     *
-     * @param   string      $message      Formatted message.
-     * @param   int         $code         Code (the ID).
-     * @param   array       $arguments    Arguments to format message.
-     * @param   \Exception  $previous     Previous exception in chaining.
+     * Allocates a new exception.
      */
     public function __construct(
-        $message,
-        $code                = 0,
-        $arguments           = [],
+        string $message,
+        int $code            = 0,
+        array $arguments     = [],
         \Exception $previous = null
     ) {
         parent::__construct($message, $code, $arguments, $previous);
@@ -77,14 +67,11 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Raise an exception as a string.
-     *
-     * @param   bool    $previous    Whether raise previous exception if exists.
-     * @return  string
+     * Raises an exception as a string.
      */
-    public function raise($previous = false)
+    public function raise(bool $includePrevious = false): string
     {
-        $out = parent::raise($previous);
+        $out = parent::raise($includePrevious);
 
         if (0 >= count($this)) {
             return $out;
@@ -98,7 +85,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
                 str_replace(
                     "\n",
                     "\n" . '    ',
-                    $exception->raise($previous)
+                    $exception->raise($includePrevious)
                 );
         }
 
@@ -106,11 +93,9 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Begin a transaction.
-     *
-     * @return  \Hoa\Exception\Group
+     * Begins a transaction.
      */
-    public function beginTransaction()
+    public function beginTransaction(): Group
     {
         $this->_group->push(new \ArrayObject());
 
@@ -118,11 +103,9 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Rollback a transaction.
-     *
-     * @return  \Hoa\Exception\Group
+     * Rollbacks a transaction.
      */
-    public function rollbackTransaction()
+    public function rollbackTransaction(): Group
     {
         if (1 >= count($this->_group)) {
             return $this;
@@ -134,11 +117,9 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Commit a transaction.
-     *
-     * @return  \Hoa\Exception\Group
+     * Commits a transaction.
      */
-    public function commitTransaction()
+    public function commitTransaction(): Group
     {
         if (false === $this->hasUncommittedExceptions()) {
             $this->_group->pop();
@@ -154,11 +135,9 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Check if there is uncommitted exceptions.
-     *
-     * @return  bool
+     * Checks if there is uncommitted exceptions.
      */
-    public function hasUncommittedExceptions()
+    public function hasUncommittedExceptions(): bool
     {
         return
             1 < count($this->_group) &&
@@ -166,12 +145,9 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Check if an index in the group exists.
-     *
-     * @param   mixed  $index    Index.
-     * @return  bool
+     * Checks if an index in the group exists.
      */
-    public function offsetExists($index)
+    public function offsetExists($index): bool
     {
         foreach ($this->_group as $group) {
             if (isset($group[$index])) {
@@ -183,12 +159,9 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Get an exception from the group.
-     *
-     * @param   mixed  $index    Index.
-     * @return  Exception
+     * Returns an exception from the group.
      */
-    public function offsetGet($index)
+    public function offsetGet($index): ?Exception
     {
         foreach ($this->_group as $group) {
             if (isset($group[$index])) {
@@ -200,11 +173,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Set an exception in the group.
-     *
-     * @param   mixed       $index        Index.
-     * @param   Exception  $exception    Exception.
-     * @return  void
+     * Sets an exception in the group.
      */
     public function offsetSet($index, $exception)
     {
@@ -225,20 +194,15 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     }
 
     /**
-     * Remove an exception in the group.
-     *
-     * @param   mixed  $index    Index.
-     * @return  void
+     * Removes an exception in the group.
      */
-    public function offsetUnset($index)
+    public function offsetUnset($index): void
     {
         foreach ($this->_group as $group) {
             if (isset($group[$index])) {
                 unset($group[$index]);
             }
         }
-
-        return;
     }
 
     /**
@@ -246,7 +210,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
      *
      * @return  \ArrayObject
      */
-    public function getExceptions()
+    public function getExceptions(): \ArrayObject
     {
         return $this->_group->bottom();
     }
@@ -256,7 +220,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
      *
      * @return  \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return $this->getExceptions()->getIterator();
     }
@@ -266,7 +230,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
      *
      * @return  int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->getExceptions());
     }
@@ -276,7 +240,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
      *
      * @return  int
      */
-    public function getStackSize()
+    public function getStackSize(): int
     {
         return count($this->_group);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -40,31 +42,22 @@ use Hoa\Consistency;
 use Hoa\Event;
 
 /**
- * Class \Hoa\Exception\Exception.
- *
- * Each exception must extend \Hoa\Exception\Exception.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
+ * Each exception must extend `Hoa\Exception\Exception`.
  */
 class Exception extends Idle implements Event\Source
 {
     /**
-     * Create an exception.
+     * Allocates a new exception.
+     *
      * An exception is built with a formatted message, a code (an ID), and an
      * array that contains the list of formatted string for the message. If
-     * chaining, we can add a previous exception.
-     *
-     * @param   string      $message      Formatted message.
-     * @param   int         $code         Code (the ID).
-     * @param   array       $arguments    Arguments to format message.
-     * @param   \Throwable  $previous     Previous exception in chaining.
+     * chaining, a previous exception can be added.
      */
     public function __construct(
-        $message,
-        $code      = 0,
-        $arguments = [],
-        $previous  = null
+        string $message,
+        int $code            = 0,
+        array $arguments     = [],
+        \Throwable $previous = null
     ) {
         parent::__construct($message, $code, $arguments, $previous);
 
@@ -78,23 +71,19 @@ class Exception extends Idle implements Event\Source
     }
 
     /**
-     * Send the exception on hoa://Event/Exception.
-     *
-     * @return  void
+     * Sends the exception on `hoa://Event/Exception`.
      */
-    public function send()
+    public function send(): void
     {
         Event::notify(
             'hoa://Event/Exception',
             $this,
             new Event\Bucket($this)
         );
-
-        return;
     }
 }
 
 /**
  * Flex entity.
  */
-Consistency::flexEntity('Hoa\Exception\Exception');
+Consistency::flexEntity(Exception::class);

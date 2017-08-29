@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -44,12 +46,11 @@ use Hoa\Test;
  *
  * Test suite of the idle exception.
  *
- * @copyright  Copyright © 2007-2017 Hoa community
  * @license    New BSD License
  */
 class Idle extends Test\Unit\Suite
 {
-    public function case_is_a_real_exception()
+    public function case_is_a_real_exception(): void
     {
         $this
             ->when($result = new SUT('foo'))
@@ -58,7 +59,7 @@ class Idle extends Test\Unit\Suite
                     ->isInstanceOf('Exception');
     }
 
-    public function case_get_backtrace()
+    public function case_get_backtrace(): void
     {
         $this
             ->given($exception = new SUT('foo'))
@@ -75,7 +76,7 @@ class Idle extends Test\Unit\Suite
                     ->hasKey('args');
     }
 
-    public function case_get_previous_throw()
+    public function case_get_previous_throw(): void
     {
         $this
             ->given(
@@ -88,7 +89,7 @@ class Idle extends Test\Unit\Suite
                     ->isIdenticalTo($previous);
     }
 
-    public function case_get_arguments()
+    public function case_get_arguments(): void
     {
         $this
             ->given($exception = new SUT('foo', 0, ['arg', 42, null]))
@@ -98,7 +99,7 @@ class Idle extends Test\Unit\Suite
                     ->isEqualTo(['arg', 42, '(null)']);
     }
 
-    public function case_get_arguments_from_a_string()
+    public function case_get_arguments_from_a_string(): void
     {
         $this
             ->given($exception = new SUT('foo', 0, 'arg'))
@@ -108,7 +109,7 @@ class Idle extends Test\Unit\Suite
                     ->isEqualTo(['arg']);
     }
 
-    public function case_get_raw_message()
+    public function case_get_raw_message(): void
     {
         $this
             ->given(
@@ -121,7 +122,7 @@ class Idle extends Test\Unit\Suite
                     ->isEqualTo($message);
     }
 
-    public function case_get_formatted_message()
+    public function case_get_formatted_message(): void
     {
         $this
             ->given(
@@ -135,7 +136,7 @@ class Idle extends Test\Unit\Suite
                     ->isEqualTo('foo bar');
     }
 
-    public function case_get_from_object()
+    public function case_get_from_object(): void
     {
         $this
             ->given($exception = new SUT('foo'))
@@ -145,7 +146,7 @@ class Idle extends Test\Unit\Suite
                     ->isEqualTo(__METHOD__ . '()');
     }
 
-    public function case_raise()
+    public function case_raise(): void
     {
         $this
             ->given($exception = new SUT('foo'), $line = __LINE__)
@@ -158,12 +159,14 @@ class Idle extends Test\Unit\Suite
                     );
     }
 
-    public function case_raise_with_previous()
+    public function case_raise_with_previous(): void
     {
         $this
             ->given(
-                $previous  = new SUT('previous'), $previousLine = __LINE__,
-                $exception = new SUT('foo', 0, [], $previous), $line = __LINE__
+                $previous     = new SUT('previous'),
+                $previousLine = __LINE__ - 1,
+                $exception    = new SUT('foo', 0, [], $previous),
+                $line         = __LINE__ - 1
             )
             ->when($result = $exception->raise(true))
             ->then
@@ -178,12 +181,13 @@ class Idle extends Test\Unit\Suite
                     );
     }
 
-    public function case_uncaught()
+    public function case_uncaught(): void
     {
         $this
             ->given(
                 $this->function->ob_get_level = 0,
-                $exception = new SUT('foo'), $line = __LINE__
+                $exception                    = new SUT('foo'),
+                $line                         = __LINE__ - 1
             )
             ->when($result = SUT::uncaught($exception))
             ->then
@@ -197,10 +201,10 @@ class Idle extends Test\Unit\Suite
                     );
     }
 
-    public function case_uncaught_not_Hoa()
+    public function case_uncaught_not_Hoa(): void
     {
         $this
-            ->exception(function () {
+            ->exception(function (): void {
                 SUT::uncaught(new \Exception('foo'));
             })
                 ->isInstanceOf('Exception')
@@ -208,7 +212,7 @@ class Idle extends Test\Unit\Suite
                 ->isEmpty();
     }
 
-    public function case_to_string()
+    public function case_to_string(): void
     {
         $this
             ->given($exception = new SUT('foo'))
@@ -218,7 +222,7 @@ class Idle extends Test\Unit\Suite
                     ->isEqualTo($exception->raise());
     }
 
-    public function case_disable_uncaught_handler()
+    public function case_disable_uncaught_handler(): void
     {
         $this
             ->given(
@@ -236,7 +240,7 @@ class Idle extends Test\Unit\Suite
                     ->isTrue();
     }
 
-    public function case_enable_uncaught_handler()
+    public function case_enable_uncaught_handler(): void
     {
         $self = $this;
 

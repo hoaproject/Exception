@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -37,29 +39,18 @@
 namespace Hoa\Exception;
 
 /**
- * Class \Hoa\Exception\Error.
- *
  * This exception is the equivalent representation of PHP errors.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Error extends Exception
 {
     /**
-     * Constructor.
-     *
-     * @param   string  $message    Message.
-     * @param   int     $code       Code (the ID).
-     * @param   string  $file       File.
-     * @param   int     $line       Line.
-     * @param   array   $trace      Trace.
+     * Allocate a new error exception.
      */
     public function __construct(
-        $message,
-        $code,
-        $file,
-        $line,
+        string $message,
+        int $code,
+        string $file,
+        int $line,
         array $trace = []
     ) {
         $this->file   = $file;
@@ -72,19 +63,16 @@ class Error extends Exception
     }
 
     /**
-     * Enable error handler: Transform PHP error into `\Hoa\Exception\Error`.
-     *
-     * @param   bool  $enable    Enable.
-     * @return  mixed
+     * Enables error handler: Transforms a PHP error into a `Hoa\Exception\Error` instance.
      */
-    public static function enableErrorHandler($enable = true)
+    public static function enableErrorHandler(bool $enable = true)
     {
         if (false === $enable) {
             return restore_error_handler();
         }
 
         return set_error_handler(
-            function ($no, $str, $file = null, $line = null, $ctx = null) {
+            function ($no, $str, $file = null, $line = null, $ctx = null): void {
                 if (0 === ($no & error_reporting())) {
                     return;
                 }

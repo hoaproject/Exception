@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -44,12 +46,11 @@ use Hoa\Test;
  *
  * Test suite of the error class.
  *
- * @copyright  Copyright © 2007-2017 Hoa community
  * @license    New BSD License
  */
 class Error extends Test\Unit\Suite
 {
-    public function case_is_an_exception()
+    public function case_is_an_exception(): void
     {
         $this
             ->when($result = new SUT('foo', 42, '/hoa/flatland', 153))
@@ -58,7 +59,7 @@ class Error extends Test\Unit\Suite
                     ->isInstanceOf('Hoa\Exception\Exception');
     }
 
-    public function case_get_message()
+    public function case_get_message(): void
     {
         $this
             ->given($exception = new SUT('foo', 42, '/hoa/flatland', 153))
@@ -71,7 +72,7 @@ class Error extends Test\Unit\Suite
                     );
     }
 
-    public function case_disable_error_handler()
+    public function case_disable_error_handler(): void
     {
         $this
             ->given(
@@ -89,7 +90,7 @@ class Error extends Test\Unit\Suite
                     ->isTrue();
     }
 
-    public function case_enable_error_handler()
+    public function case_enable_error_handler(): void
     {
         $self = $this;
 
@@ -132,11 +133,11 @@ class Error extends Test\Unit\Suite
                     ->isTrue();
     }
 
-    public function case_error_handler()
+    public function case_error_handler(): void
     {
         $this
             ->given(SUT::enableErrorHandler())
-            ->exception(function () {
+            ->exception(function (): void {
                 ++$i;
             })
                 ->isInstanceOf('Hoa\Exception\Error')

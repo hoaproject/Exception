@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -45,12 +47,11 @@ use Hoa\Test;
  *
  * Test suite of the exception class.
  *
- * @copyright  Copyright © 2007-2017 Hoa community
  * @license    New BSD License
  */
 class Exception extends Test\Unit\Suite
 {
-    public function case_is_an_idle_exception()
+    public function case_is_an_idle_exception(): void
     {
         $this
             ->when($result = new SUT('foo'))
@@ -59,7 +60,7 @@ class Exception extends Test\Unit\Suite
                     ->isInstanceOf('Hoa\Exception\Idle');
     }
 
-    public function case_event_is_registered()
+    public function case_event_is_registered(): void
     {
         $this
             ->given(new SUT('foo'))
@@ -69,14 +70,14 @@ class Exception extends Test\Unit\Suite
                     ->isTrue();
     }
 
-    public function case_event_is_sent()
+    public function case_event_is_sent(): void
     {
         $self = $this;
 
         $this
             ->given(
                 Event::getEvent('hoa://Event/Exception')->attach(
-                    function (Event\Bucket $bucket) use ($self, &$called) {
+                    function (Event\Bucket $bucket) use ($self, &$called): void {
                         $called = true;
 
                         $self

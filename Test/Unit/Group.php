@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -44,12 +46,11 @@ use Hoa\Test;
  *
  * Test suite of the group class.
  *
- * @copyright  Copyright © 2007-2017 Hoa community
  * @license    New BSD License
  */
 class Group extends Test\Unit\Suite
 {
-    public function case_is_an_exception_arrayaccess_iteratoraggregate_countable()
+    public function case_is_an_exception_arrayaccess_iteratoraggregate_countable(): void
     {
         $this
             ->when($result = new SUT('foo'))
@@ -61,7 +62,7 @@ class Group extends Test\Unit\Suite
                     ->isInstanceOf('Countable');
     }
 
-    public function case_constructor()
+    public function case_constructor(): void
     {
         $this
             ->given(
@@ -84,7 +85,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_raise_zero_exception()
+    public function case_raise_zero_exception(): void
     {
         $this
             ->given($group = new SUT('foo'), $line = __LINE__)
@@ -97,12 +98,14 @@ class Group extends Test\Unit\Suite
                     );
     }
 
-    public function case_raise_one_exception()
+    public function case_raise_one_exception(): void
     {
         $this
             ->given(
-                $exception1 = new SUT('bar'), $barLine = __LINE__,
-                $group      = new SUT('foo'), $fooLine = __LINE__,
+                $exception1 = new SUT('bar'),
+                $barLine    = __LINE__ - 1,
+                $group      = new SUT('foo'),
+                $fooLine    = __LINE__ - 1,
                 $group[]    = $exception1
             )
             ->when($result = $group->raise())
@@ -117,13 +120,16 @@ class Group extends Test\Unit\Suite
                     );
     }
 
-    public function case_raise_more_exceptions()
+    public function case_raise_more_exceptions(): void
     {
         $this
             ->given(
-                $exception1 = new SUT('bar'), $barLine = __LINE__,
-                $exception2 = new SUT('baz'), $bazLine = __LINE__,
-                $group      = new SUT('foo'), $fooLine = __LINE__,
+                $exception1 = new SUT('bar'),
+                $barLine    = __LINE__ - 1,
+                $exception2 = new SUT('baz'),
+                $bazLine    = __LINE__ - 1,
+                $group      = new SUT('foo'),
+                $fooLine    = __LINE__ - 1,
                 $group[]    = $exception1,
                 $group[]    = $exception2
             )
@@ -141,7 +147,7 @@ class Group extends Test\Unit\Suite
                     );
     }
 
-    public function case_begin_transaction()
+    public function case_begin_transaction(): void
     {
         $this
             ->given(
@@ -161,7 +167,7 @@ class Group extends Test\Unit\Suite
                     ->isEqualTo($oldStackSize + 1);
     }
 
-    public function case_rollback_transaction_with_an_empty_stack()
+    public function case_rollback_transaction_with_an_empty_stack(): void
     {
         $this
             ->given(
@@ -181,7 +187,7 @@ class Group extends Test\Unit\Suite
                     ->isEqualTo($oldStackSize);
     }
 
-    public function case_rollback_transaction()
+    public function case_rollback_transaction(): void
     {
         $this
             ->given(
@@ -204,7 +210,7 @@ class Group extends Test\Unit\Suite
                     ->isEqualTo($oldStackSize - 2);
     }
 
-    public function case_commit_transaction_with_an_empty_stack()
+    public function case_commit_transaction_with_an_empty_stack(): void
     {
         $this
             ->given(
@@ -231,7 +237,7 @@ class Group extends Test\Unit\Suite
                     ->isEqualTo($oldStackSize - 1);
     }
 
-    public function case_commit_transaction()
+    public function case_commit_transaction(): void
     {
         $this
             ->given(
@@ -267,7 +273,7 @@ class Group extends Test\Unit\Suite
                     ]);
     }
 
-    public function case_has_uncommitted_exceptions()
+    public function case_has_uncommitted_exceptions(): void
     {
         $this
             ->given(
@@ -281,7 +287,7 @@ class Group extends Test\Unit\Suite
                     ->isTrue();
     }
 
-    public function case_has_no_uncommitted_exceptions()
+    public function case_has_no_uncommitted_exceptions(): void
     {
         $this
             ->given(
@@ -294,7 +300,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_has_no_uncommitted_exceptions_with_empty_stack()
+    public function case_has_no_uncommitted_exceptions_with_empty_stack(): void
     {
         $this
             ->given(
@@ -307,7 +313,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_offset_exists_with_no_uncommited_exceptions()
+    public function case_offset_exists_with_no_uncommited_exceptions(): void
     {
         $this
             ->given(
@@ -320,7 +326,7 @@ class Group extends Test\Unit\Suite
                     ->isTrue();
     }
 
-    public function case_offset_does_not_exist_with_no_uncommited_exceptions()
+    public function case_offset_does_not_exist_with_no_uncommited_exceptions(): void
     {
         $this
             ->given(
@@ -333,7 +339,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_offset_exists()
+    public function case_offset_exists(): void
     {
         $this
             ->given(
@@ -348,7 +354,7 @@ class Group extends Test\Unit\Suite
                     ->isTrue();
     }
 
-    public function case_offset_does_not_exist()
+    public function case_offset_does_not_exist(): void
     {
         $this
             ->given(
@@ -363,7 +369,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_offset_get_with_no_uncommited_exceptions()
+    public function case_offset_get_with_no_uncommited_exceptions(): void
     {
         $this
             ->given(
@@ -377,7 +383,7 @@ class Group extends Test\Unit\Suite
                     ->isIdenticalTo($exception1);
     }
 
-    public function case_offset_get_does_not_exist_with_no_uncommited_exceptions()
+    public function case_offset_get_does_not_exist_with_no_uncommited_exceptions(): void
     {
         $this
             ->given(
@@ -391,7 +397,7 @@ class Group extends Test\Unit\Suite
                     ->isNull();
     }
 
-    public function case_offset_get()
+    public function case_offset_get(): void
     {
         $this
             ->given(
@@ -407,7 +413,7 @@ class Group extends Test\Unit\Suite
                     ->isIdenticalTo($exception1);
     }
 
-    public function case_offset_get_does_not_exist()
+    public function case_offset_get_does_not_exist(): void
     {
         $this
             ->given(
@@ -423,7 +429,7 @@ class Group extends Test\Unit\Suite
                     ->isNull();
     }
 
-    public function case_offset_set_not_an_exception()
+    public function case_offset_set_not_an_exception(): void
     {
         $this
             ->given($group = new SUT('foo'))
@@ -433,7 +439,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_offset_set()
+    public function case_offset_set(): void
     {
         $this
             ->given(
@@ -453,7 +459,7 @@ class Group extends Test\Unit\Suite
                     ->isIdenticalTo($exception1);
     }
 
-    public function case_offset_set_with_a_null_index()
+    public function case_offset_set_with_a_null_index(): void
     {
         $this
             ->given(
@@ -468,7 +474,7 @@ class Group extends Test\Unit\Suite
                     ->isIdenticalTo($exception1);
     }
 
-    public function case_offset_set_with_an_integer_index()
+    public function case_offset_set_with_an_integer_index(): void
     {
         $this
             ->given(
@@ -485,7 +491,7 @@ class Group extends Test\Unit\Suite
                     ->isIdenticalTo($exception1);
     }
 
-    public function case_offset_unset_with_no_uncommited_exceptions()
+    public function case_offset_unset_with_no_uncommited_exceptions(): void
     {
         $this
             ->given(
@@ -498,7 +504,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_offset_unset_does_not_exist_with_no_uncommited_exceptions()
+    public function case_offset_unset_does_not_exist_with_no_uncommited_exceptions(): void
     {
         $this
             ->given($group = new SUT('foo'))
@@ -508,7 +514,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_offset_unset()
+    public function case_offset_unset(): void
     {
         $this
             ->given(
@@ -523,7 +529,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_offset_unset_does_not_exist()
+    public function case_offset_unset_does_not_exist(): void
     {
         $this
             ->given(
@@ -537,7 +543,7 @@ class Group extends Test\Unit\Suite
                     ->isFalse();
     }
 
-    public function case_get_exceptions()
+    public function case_get_exceptions(): void
     {
         $this
             ->given(
@@ -556,7 +562,7 @@ class Group extends Test\Unit\Suite
                     ->isIdenticalTo($exception1);
     }
 
-    public function case_get_iterator()
+    public function case_get_iterator(): void
     {
         $this
             ->given(
@@ -574,7 +580,7 @@ class Group extends Test\Unit\Suite
                     ]);
     }
 
-    public function case_count()
+    public function case_count(): void
     {
         $this
             ->given(
@@ -591,7 +597,7 @@ class Group extends Test\Unit\Suite
                     ->isEqualTo(1);
     }
 
-    public function get_get_stack_size()
+    public function get_get_stack_size(): void
     {
         $this
             ->given(
