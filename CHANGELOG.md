@@ -1,3 +1,14 @@
+# 2.17.08.30
+
+  * chore(composer) Anticipate future releases. (Ivan Enderlin, 2017-08-30T14:10:13+02:00)
+  * chore(ci) Drop PHP 5 and PHP 7.0. (Ivan Enderlin, 2017-08-30T14:07:04+02:00)
+  * fix(git) Fix a conflict with `composer.json`. (Ivan Enderlin, 2017-08-30T14:03:51+02:00)
+  * chore(php) Move to PHP 7 and rewrite the doc. (Ivan Enderlin, 2017-08-29T16:41:21+02:00)
+  * chore(composer) Update `hoa/consistency`. (Ivan Enderlin, 2017-08-29T16:02:28+02:00)
+  * chore(path) Move code into the `Source` directory. (Ivan Enderlin, 2017-08-29T16:02:09+02:00)
+  * chore(ci) Drop HHVM support. (Stéphane HULARD, 2017-07-07T12:00:38+02:00)
+  * CI: Set up Travis. (Ivan Enderlin, 2017-03-08T09:01:15+01:00)
+
 # 1.17.01.16
 
   * Quality: Happy new year! (Ivan Enderlin, 2017-01-16T08:52:04+01:00)
