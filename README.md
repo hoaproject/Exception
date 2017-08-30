@@ -37,7 +37,7 @@ your dependencies, you need to
 require [`hoa/exception`](https://packagist.org/packages/hoa/exception):
 
 ```sh
-$ composer require hoa/exception '~1.0'
+$ composer require hoa/exception '~2.0'
 ```
 
 For more installation procedures, please read [the Source
