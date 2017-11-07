@@ -81,8 +81,8 @@ class Idle extends \Exception
      */
     public function __construct(
         string $message,
-        int $code = 0,
-        /* array|string */ $arguments = [],
+        int $code            = 0,
+        $arguments           = [],
         \Exception $previous = null
     ) {
         $this->_tmpArguments = $arguments;
