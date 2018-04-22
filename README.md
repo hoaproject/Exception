@@ -76,7 +76,7 @@ An exception is constitued of:
 Thus, the following example builds an exception:
 
 ```php
-$exception = new Hoa\Exception\Exception('Hello %s!', 0, 'world');
+$exception = new Hoa\Exception\Exception('Hello %s!', 0, ['world']);
 ```
 
 The exception message will be: `Hello world!`. The “raise” message (with all
@@ -91,7 +91,7 @@ Previous exceptions are shown too, for instance:
 
 ```php
 $previous  = new Hoa\Exception\Exception('Hello previous.');
-$exception = new Hoa\Exception\Exception('Hello %s!', 0, 'world', $previous);
+$exception = new Hoa\Exception\Exception('Hello %s!', 0, ['world'], $previous);
 
 echo $exception->raise(true);
 
